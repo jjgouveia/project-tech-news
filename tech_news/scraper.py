@@ -1,6 +1,7 @@
 import requests
 from requests import HTTPError, ReadTimeout
 from time import sleep
+from parsel import Selector
 
 
 # Requisito 1
@@ -18,7 +19,18 @@ def fetch(url, wait=3):
 
 # Requisito 2
 def scrape_updates(html_content):
-    """Seu código deve vir aqui"""
+    selector = Selector(html_content)
+
+    try:
+        quotes = selector.css('.entry-title > a::attr(href)').getall()
+    except(requests.exceptions.ConnectionError):
+        return []
+
+    return quotes
+
+
+# html = fetch("https://blog.betrybe.com/")
+# print(scrape_updates(html))
 
 
 # Requisito 3
