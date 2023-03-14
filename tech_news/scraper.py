@@ -59,11 +59,6 @@ def scrape_news(html_content):
     return scrape
 
 
-# html = fetch("""https://blog.betrybe.com/linguagem-de-
-# programacao/o-que-e-array/""")
-# print(scrape_news(html))
-
-
 # Requisito 5
 def get_tech_news(amount: int):
     BASE_URL = "https://blog.betrybe.com"
