@@ -43,16 +43,16 @@ def scrape_news(html_content):
     selector = Selector(html_content)
 
     scrape = {
-        "url": selector.css("link[rel='canonical']::attr(href)").get().strip(),
+        "url": selector.css("link[rel='canonical']::attr(href)").get(),
         "title": selector.css('.entry-title::text').get().strip(),
-        "timestamp": selector.css('.meta-date::text').get().strip(),
-        "writer": selector.css('.author > a::text').get().strip(),
+        "timestamp": selector.css('.meta-date::text').get(),
+        "writer": selector.css('.author > a::text').get(),
         "reading_time": int(selector.css('.meta-reading-time::text')
                             .get()[:2]),
         "summary": "".join(
             selector.css(".entry-content > p:first-of-type *::text").getall()
         ).strip(),
-        "category": selector.css(".label::text").get().strip(),
+        "category": selector.css(".label::text").get(),
     }
 
     return scrape
