@@ -6,13 +6,20 @@ from tech_news.database import create_news
 
 
 # Requisito 1
-def fetch(url, wait=3):
+DEFAULT_WAIT_TIME = 3
+
+
+def fetch(url, wait=DEFAULT_WAIT_TIME):
     headers = {"user-agent": "Fake user-agent"}
     try:
         sleep(1)
         response = requests.get(url, timeout=wait, headers=headers)
         response.raise_for_status()
-    except(HTTPError, ReadTimeout):
+    except HTTPError as e:
+        print(f"Ocorreu um erro HTTP ao acessar a URL: {e}")
+        return None
+    except ReadTimeout as e:
+        print(f"A solicitação expirou após {wait} segundos: {e}")
         return None
 
     return response.text
