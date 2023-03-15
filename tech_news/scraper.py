@@ -62,11 +62,10 @@ def scrape_news(html_content):
 # Requisito 5
 def get_tech_news(amount: int):
     BASE_URL = "https://blog.betrybe.com"
-    content = fetch(BASE_URL)
     paginator = True
     news: list[dict] = []
 
-    while paginator:
+    while paginator and len(news) < amount:
         content = fetch(BASE_URL)
         links = scrape_updates(content)
         BASE_URL = scrape_next_page_link(content)
@@ -78,5 +77,6 @@ def get_tech_news(amount: int):
             else:
                 paginator = False
                 break
+
     create_news(news)
-    return news
+    return news[:amount]
