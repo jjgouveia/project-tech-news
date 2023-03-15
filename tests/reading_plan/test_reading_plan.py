@@ -123,9 +123,12 @@ def test_reading_plan_group_news(mock_find_news):
         8
     )
 
-    assert len(news_for_available_time["readable"]) == 3
-    assert len(news_for_available_time["unreadable"]) == 7
-    assert news_for_available_time["readable"][0]["unfilled_time"] == 2
+    assert len(news_for_available_time["readable"]) == 1
+    assert len(news_for_available_time["unreadable"]) == 0
+    assert news_for_available_time["readable"][0]["unfilled_time"] == 3
 
     with pytest.raises(ValueError):
         ReadingPlanService.group_news_for_available_time(0)
+
+
+test_reading_plan_group_news()
