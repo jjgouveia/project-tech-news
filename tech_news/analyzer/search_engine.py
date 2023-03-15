@@ -10,7 +10,7 @@ def search_adapter(query: str) -> list[tuple]:
 
 
 # Requisito 7
-def search_by_title(title: str) -> str:
+def search_by_title(title: str) -> list[tuple]:
     news: list[tuple] = search_adapter(
         {"title": {"$regex": title, "$options": "i"}}
     )
@@ -18,7 +18,7 @@ def search_by_title(title: str) -> str:
 
 
 # Requisito 8
-def search_by_date(date: str) -> str:
+def search_by_date(date: str) -> list[tuple]:
     try:
         date_formated: str = datetime.fromisoformat(date).strftime("%d/%m/%Y")
         return search_adapter({"timestamp": {"$regex": date_formated}})
@@ -27,7 +27,7 @@ def search_by_date(date: str) -> str:
 
 
 # Requisito 9
-def search_by_category(category: str) -> str:
+def search_by_category(category: str) -> list[tuple]:
     news: list[tuple] = search_adapter(
         {"category": {"$regex": category, "$options": "i"}}
     )
